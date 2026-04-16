@@ -1,0 +1,38 @@
+# Maven
+
+target/
+
+# Gradle
+
+.gradle/
+build/
+
+# Logs
+
+logs/
+*.log
+
+# Environment files (optional, if you use locally)
+
+.env
+
+# IDE
+
+.idea/
+*.iml
+.vscode/
+
+# OS
+
+.DS_Store
+Thumbs.db
+
+# Temp
+
+tmp/
+temp/
+
+# DB files
+
+*.db
+*.sqlite
