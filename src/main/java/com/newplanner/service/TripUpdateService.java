@@ -45,9 +45,11 @@ public class TripUpdateService {
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
-                    String[] weatherMatrix = weatherService.deriveWeatherCondition(
+                    String[] weatherMatrix = weatherService.derivePredictiveWeather(
                             activity.getLatitude(),
-                            activity.getLongitude()
+                            activity.getLongitude(),
+                            currentDayDate,
+                            activity.getStartTime()
                     );
                     activity.setWeatherCondition(weatherMatrix[0]);
                     activity.setCriticalWeatherAlert(Boolean.parseBoolean(weatherMatrix[1]));
