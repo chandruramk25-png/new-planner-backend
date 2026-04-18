@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import org.springframework.transaction.annotation.Transactional;
 
 @RestController
 @RequestMapping("/trips")
@@ -31,6 +32,7 @@ public class TripController {
 
     /** GET /trips?firebaseUid=xyz — fetch all trips for a user's dashboard */
     @GetMapping
+    @Transactional(readOnly = true)
     public ResponseEntity<List<Itinerary>> getTripsForUser(@RequestParam String firebaseUid) {
         log.info("Fetching all trips for user: {}", firebaseUid);
         List<Itinerary> trips = itineraryRepository.findByUserFirebaseUidOrderByCreatedAtDesc(firebaseUid);
@@ -42,6 +44,7 @@ public class TripController {
      * recovery)
      */
     @GetMapping("/{id}")
+    @Transactional(readOnly = true)
     public ResponseEntity<Itinerary> getTripById(@PathVariable String id) {
         log.info("Fetching trip by ID: {}", id);
         return itineraryRepository.findById(id)
