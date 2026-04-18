@@ -227,7 +227,9 @@ public class GenerationPipelineService {
             itinerary.setGroupType(request.getGroupType() != null ? request.getGroupType() : "Couple");
             itinerary.setStartDate(tripStartDate);
             itinerary.setEndDate(LocalDate.parse(request.getEndDate().split("T")[0]));
-            itinerary.setUserFirebaseUid(request.getFirebaseUid());
+            if (request.getFirebaseUid() != null && !request.getFirebaseUid().isBlank()) {
+                userRepository.findById(request.getFirebaseUid()).ifPresent(itinerary::setUser);
+            }
             itinerary.setDays(new ArrayList<>());
 
             JsonNode aiRoot = objectMapper.readTree(cleanedAiJson);
